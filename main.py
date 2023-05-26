@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import json
 
 
@@ -93,5 +95,12 @@ def date_to_periods(periods_tree, date):
     return periods
 
 
-periods_tree = load_data("data/periods_infos.json", "data/periods_intervals.json")
-print(list(map(lambda x: x.name, date_to_periods(periods_tree, -140))))
+if __name__ == "__main__":
+    year = abs(float(input("Enter the year you want the periods from (in millions of years in the past from now):")))
+    periods_tree = load_data("data/periods_infos.json", "data/periods_intervals.json")
+    periods = list(map(lambda x: x.name, date_to_periods(periods_tree, -year)))
+    ident = ""
+    print("Periods tree for year -%i Ma:" % year)
+    for period in periods:
+        print(ident + "> " + period)
+        ident += "  "
